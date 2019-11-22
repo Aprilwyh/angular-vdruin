@@ -24,11 +24,14 @@ class Hero {
   ]
 })
 export class OnChangesComponent implements OnChanges {
-  @Input() hero: Hero;
-  @Input() power: string;
+  @Input() hero: Hero; // 对英雄对象的引用
+  @Input() power: string; // 字符串类型
+  @Input() name: string;
 
   changeLog: string[] = [];
 
+  // 当输入框的值改变之后就会调用，但是改变Power触发了，改变Hero.name没有触发，是因为hero属性的值是一个英雄对象的引用，name属性变化但是引用没有发生变化。
+  // 加入属性name之后也会调用
   ngOnChanges(changes: SimpleChanges) {
     for (let propName in changes) {
       let chng = changes[propName];

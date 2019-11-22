@@ -24,7 +24,7 @@ export class PeekABoo implements OnInit {
     this.logger.log(`#${nextId++} ${msg}`);
   }
 }
-
+// 展示所有可能存在的钩子
 @Component({
   selector: 'peek-a-boo',
   template: '<p>Now you see my hero, {{name}}</p>',

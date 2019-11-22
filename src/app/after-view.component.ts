@@ -28,6 +28,7 @@ export class AfterViewComponent implements  AfterViewChecked, AfterViewInit {
   private prevHero = '';
 
   // Query for a VIEW child of type `ChildViewComponent`
+  // 通过带@ViewChild装饰器的属性来访问子视图
   @ViewChild(ChildViewComponent, {static: false}) viewChild: ChildViewComponent;
 
   constructor(private logger: LoggerService) {
@@ -56,8 +57,11 @@ export class AfterViewComponent implements  AfterViewChecked, AfterViewInit {
   // This surrogate for real business logic sets the `comment`
   private doSomething() {
     let c = this.viewChild.hero.length > 10 ? `That's a long name` : '';
+    // 当长度大于10才会进入下面的if
     if (c !== this.comment) {
       // Wait a tick because the component's view has already been checked
+      // 在更新comment之前要等上一个tick（comment就是长度大于10显示的内容）
+      // 遵循单向数据流规则
       this.logger.tick_then(() => this.comment = c);
     }
   }
